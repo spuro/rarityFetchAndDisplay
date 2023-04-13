@@ -28,7 +28,7 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/pages/api/rarity/[id].js"
+    "src/pages/api/rarity/[id].ts"
   ],
   "exclude": ["node_modules"]
 }
