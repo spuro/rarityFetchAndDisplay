@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         </a>
         <SpecificIdDisplay />
         <TopRanked />
-        <p>I`&apos;`ll add more features later</p>
+        <p>I&apos;ll add more features later</p>
       </main>
     </>
   );
@@ -126,7 +126,7 @@ const SpecificIdDisplay: FunctionComponent = () => {
         {scoreRanking}
       </div>
       <p className="py-2 text-center italic">
-        `&quot;`Rank`&quot;` is based off of rarity score. Read more{" "}
+        &quot;Rank&quot; is based off of rarity score. Read more{" "}
         <a
           href="https://raritytools.medium.com/ranking-rarity-understanding-rarity-calculation-methods-86ceaeb9b98c"
           target="_blank"
