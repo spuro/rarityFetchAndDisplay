@@ -1,11 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import rarityResults from "../../../data/rarityResults.json";
+const rarityResults: {
+  [key: string]: number;
+} = require("../../../data/rarityResults.json");
+
+const scoreRankings: {
+  id: number;
+  value: number;
+}[] = require("../../../data/scoreRankings.json");
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   req.statusCode = 200;
-  console.log(req.query);
-  res.send({
-    //@ts-ignore
-    id: rarityResults[req.query.id],
-  });
+
+  // Get the id from the query
+  const { id } = req.query as { id: string };
+
+  const rarity = rarityResults[id];
+  const rank = scoreRankings.findIndex((r) => r.id === parseInt(id));
+
+  if (rarity) {
+    res.status(200).json({ rarity, rank });
+  } else {
+    res.status(404).json({ message: "Not found" });
+  }
 }
