@@ -1,6 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import React, { FormEvent, useState, FunctionComponent } from "react";
+import React, {
+  FormEvent,
+  useState,
+  FunctionComponent,
+  useEffect,
+} from "react";
 
 type TokenRarityEntry = {
   value: string;
@@ -109,7 +114,8 @@ const SpecificIdDisplay: FunctionComponent = () => {
   };
 
   return (
-    <div className="mt-[25px] flex w-4/5 flex-col rounded-md">
+    <div className="mt-[50px] flex w-4/5 flex-col rounded-md bg-neutral-950 p-4">
+      <p className="text-center text-3xl font-bold">LOOK UP BY TOKEN ID</p>
       <form
         onSubmit={(e) => {
           processIdRarityFetch(e);
@@ -169,7 +175,94 @@ const SpecificIdDisplay: FunctionComponent = () => {
 };
 
 const TopRanked: FunctionComponent = () => {
-  return <></>;
+  interface IScoreEntry {
+    id: number;
+    value: number;
+  }
+
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [topScores, setTopScores] = useState<IScoreEntry[]>();
+
+  useEffect(() => {
+    fetch(`/api/top/${currentIndex}`)
+      .then((res) => {
+        res
+          .json()
+          .then((json: IScoreEntry[]) => {
+            setTopScores(json);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [currentIndex]);
+
+  const handleChangeIndex = (_change: number) => {
+    if (currentIndex + _change < 0) {
+      setCurrentIndex(0);
+    } else if (currentIndex + _change > 3990) {
+      setCurrentIndex(3990);
+    } else {
+      setCurrentIndex(currentIndex + _change);
+    }
+  };
+
+  return (
+    <div className="mt-[50px] flex w-4/5 flex-col rounded-md bg-neutral-950 p-4 text-center">
+      <p className="text-3xl font-bold">RARITY LEADERBOARD</p>
+      <div className="grid grid-cols-3 py-2 text-2xl">
+        <p
+          className="cursor-pointer hover:text-red-500"
+          onClick={() => handleChangeIndex(-10)}
+        >
+          {"<--"}
+        </p>
+        <p className="">
+          {currentIndex + 1} - {currentIndex + 10}
+        </p>
+        <p
+          className="cursor-pointer hover:text-red-500"
+          onClick={() => handleChangeIndex(10)}
+        >
+          {"-->"}
+        </p>
+      </div>
+      <div className="flex w-full flex-col gap-1">
+        {topScores
+          ? topScores.map((entry, index) => {
+              return (
+                <div className="grid grid-cols-3" key={index}>
+                  <div className="flex items-center justify-center">
+                    <p key={index} className="text-3xl">
+                      Rank {currentIndex + index + 1}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center justify-center gap-5">
+                    <p key={index} className="text-3xl">
+                      YAYO Man #{entry.id}
+                    </p>
+                    <div className="flex flex-col">
+                      <p>Trait score:</p>
+                      <p key={index} className="text-3xl">
+                        {entry.value ? entry.value.toFixed(2) : ""}
+                      </p>
+                    </div>
+                  </div>
+                  <img
+                    src={`https://yayo.fund/yayo_nft/${entry.id}.png`}
+                    className="h-48"
+                    alt="YayoCorp Logo"
+                  />
+                </div>
+              );
+            })
+          : ""}
+      </div>
+    </div>
+  );
 };
 
 export default Home;
