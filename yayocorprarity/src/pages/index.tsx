@@ -1,12 +1,6 @@
-import { type NextPage, NextComponentType } from "next";
+import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import React, {
-  FormEvent,
-  useState,
-  ReactElement,
-  FunctionComponent,
-} from "react";
+import React, { FormEvent, useState, FunctionComponent } from "react";
 
 type TokenRarityEntry = {
   value: string;
@@ -33,6 +27,7 @@ const Home: NextPage = () => {
         <img
           src="https://yayo.fund/img/yayo/logo_full/logo-pink.png"
           className="h-48"
+          alt="YayoCorp Logo"
         />
         <a
           href="https://lmgtfy.app/?q=testosterone+supplements"
@@ -48,41 +43,53 @@ const Home: NextPage = () => {
   );
 };
 
-const SpecificIdDisplay: React.FC = () => {
-  type TokenScores = {
+const SpecificIdDisplay: FunctionComponent = () => {
+  interface TokenScores {
     rarityScore: number;
     occurence: number;
     value: string;
-  };
+  }
+
+  interface TokenRarityEntry {
+    rarity: TokenScores[];
+    rank: number;
+  }
 
   const [tokenScores, setTokenScores] = useState<TokenScores[]>();
   const [scoreRanking, setScoreRanking] = useState<number>(0);
 
-  const processIdRarityFetch = async (e: FormEvent<HTMLFormElement>) => {
+  const processIdRarityFetch = (e: FormEvent<HTMLFormElement>) => {
     type IdDesired = {
       id_desired: string;
     };
 
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
-    const json = JSON.parse(JSON.stringify(Object.fromEntries(data.entries())));
+    const json: IdDesired = JSON.parse(
+      JSON.stringify(Object.fromEntries(data.entries()))
+    ) as IdDesired;
 
-    console.log(json as IdDesired);
-
-    const response = await fetch(`/api/rarity/${json.id_desired}`);
-    const resJson: { rarity: TokenScores[]; rank: number } =
-      await response.json();
-
-    console.log(resJson);
-
-    setTokenScores(resJson.rarity);
-    setScoreRanking(resJson.rank);
+    fetch(`/api/rarity/${json.id_desired}`)
+      .then((res) => {
+        res
+          .json()
+          .then((json: TokenRarityEntry) => {
+            setTokenScores(json.rarity);
+            setScoreRanking(json.rank);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className="mt-[100px] flex flex-col rounded-md bg-red-500">
       <form
-        onSubmit={async (e) => {
+        onSubmit={(e) => {
           processIdRarityFetch(e);
         }}
         className="flex flex-col gap-2 text-center"
@@ -97,7 +104,7 @@ const SpecificIdDisplay: React.FC = () => {
         {tokenScores
           ? Object.entries(tokenScores).map(([key, entry], index) => {
               return (
-                <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="grid grid-cols-3 gap-2 text-center" key={index}>
                   <div></div>
                   <div className="flex flex-col">
                     <p className="font-bold">{key}</p>
