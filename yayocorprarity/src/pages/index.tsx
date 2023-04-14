@@ -73,6 +73,7 @@ const SpecificIdDisplay: FunctionComponent = () => {
   const [tokenScores, setTokenScores] = useState<TokenScores[]>();
   const [scoreRanking, setScoreRanking] = useState<number>(0);
   const [error, setError] = useState("");
+  const [currentID, setCurrentID] = useState<number | null>(null);
 
   const processIdRarityFetch = (e: FormEvent<HTMLFormElement>) => {
     type IdDesired = {
@@ -84,6 +85,8 @@ const SpecificIdDisplay: FunctionComponent = () => {
     const json: IdDesired = JSON.parse(
       JSON.stringify(Object.fromEntries(data.entries()))
     ) as IdDesired;
+
+    setCurrentID(parseInt(json.id_desired));
 
     if (json.id_desired.length === 0) {
       setError("Enter something idiot");
@@ -127,9 +130,18 @@ const SpecificIdDisplay: FunctionComponent = () => {
         <button>Submit</button>
       </form>
       {error.length > 0 ? <p className="text-red-600">{error}</p> : ""}
-      <div className="flex flex-row justify-evenly gap-4 bg-red-600 text-3xl">
-        <p>RANK</p>
-        {scoreRanking}
+      <div className="grid w-full grid-cols-2">
+        <div className="flex w-full flex-col items-center justify-center bg-red-600">
+          <p className="text-lg">RANK</p>
+          <p className="text-4xl">{scoreRanking}</p>
+          <p>/4000</p>
+        </div>
+        <div className="flex items-center justify-center bg-red-900">
+          <img
+            src={currentID ? `https://yayo.fund/yayo_nft/${currentID}.png` : ""}
+            className="w-[400px]"
+          />
+        </div>
       </div>
       <p className="py-2 text-center italic">
         &quot;Rank&quot; is based off of rarity score. Read more{" "}
