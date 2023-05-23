@@ -4,7 +4,7 @@ const uri = "https://yayo.fund/yayo_nft/json/"
 
 const count = 4000
 
-let current = 2308
+let current = 1
 
 let allMeta = {}
 

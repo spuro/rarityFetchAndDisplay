@@ -13,6 +13,12 @@ type TokenRarityEntry = {
   rarityScore: number;
 };
 
+import TraitCounts from "../data/traitCounts.json";
+
+interface ITraitCounts {
+  [key: string]: { [key: string]: number };
+}
+
 const Home: NextPage = () => {
   return (
     <>
@@ -52,6 +58,7 @@ const Home: NextPage = () => {
         </a>
         <SpecificIdDisplay />
         <TopRanked />
+        <TraitViewer />
         <p>I&apos;ll add more features later</p>
       </main>
     </>
@@ -273,6 +280,33 @@ const TopRanked: FunctionComponent = () => {
             })
           : ""}
       </div>
+    </div>
+  );
+};
+
+const TraitViewer: FunctionComponent = () => {
+  const traitCounts = TraitCounts as ITraitCounts;
+
+  return (
+    <div className="mt-[50px] flex w-4/5 flex-col rounded-md bg-neutral-950 p-4 text-center">
+      <p className="text-3xl font-bold">TRAIT COUNTS</p>
+      <p className="italic">In order of rarest to most common, by trait.</p>
+      {Object.entries(TraitCounts).map(([key, count], index) => {
+        return (
+          <div className="grid grid-cols-2" key={index}>
+            <div className="flex items-center justify-center">
+              <p key={index} className="text-3xl">
+                {key}
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center gap-5">
+              <p key={index} className="text-3xl">
+                {count}
+              </p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

@@ -121,11 +121,11 @@
   },
   "Head": {
     "Charlotte Fang Issued FBI Hat": 198,
-    "Medium Length Hair": 153,
+    "Medium Length Hair Hair": 153,
     "Bald": 140,
     "Olive Bucket Hat": 156,
     "Buzzcut": 403,
-    "Slicked Back Hair": 80,
+    "Slicked Back Hair Hair": 80,
     "Bad Motherfucker Afro": 68,
     "Mullet": 384,
     "White Bucket Hat": 122,
@@ -136,11 +136,10 @@
     "Balaclava": 81,
     "Afro": 83,
     "Power Donut": 110,
-    "Windswept Hair": 69,
+    "Windswept Hair": 190,
     "Cowboy Hat": 131,
-    "Medium Length": 243,
-    "Slicked Back": 116,
-    "Rough Medium": 121
+    "Medium Length Hair": 243,
+    "Slicked Back Hair": 116
   },
   "Item": {
     "Gold IMI Desert Eagle .50AE": 40,
@@ -188,7 +187,7 @@
     "Gordon Freeman's Crowbar": 28,
     "Feed Me A Stray Cat": 19,
     "Beretta 92FS": 52,
-    "H&K Mark 23 w/ USSOCOM Supressor & Laser": 38,
+    "H&K Mark 23 w/ USSOCOM Suppressor & Laser": 38,
     "Basketball": 5,
     "Katana": 33,
     "Steyr AUG A1": 31,
@@ -270,7 +269,7 @@
   "Vehicle": {
     "1994 Mercedes-Benz W140 S600": 45,
     "1979 Porsche 911 Carrera Targa Turbo": 39,
-    "General Motors EMD F40PH Amtrak Train": 8,
+    "General Motors EMD F40PH Amtrak Train": 15,
     "1978 Ford Bronco": 124,
     "1970 Dodge Charger R/T": 54,
     "1985 Lamborghini Countache LP5000 QV": 51,
@@ -324,7 +323,7 @@
     "1993 Jaguar XJ6": 36,
     "1989 M1 Abrams Tank": 20,
     "1987 Ferrari F40": 31,
-    "1934 Mercedes-Benz Grand Prix W25": 12,
+    "1934 Mercedes-Benz Grand Prix W25": 24,
     "1971 U.S. Apollo Lunar Roving Vehicle": 38,
     "1970 Plymouth Hemi 'Cuda": 90,
     "1983 Land Rover Defender 110": 134,
@@ -339,7 +338,7 @@
     "2006 Audi R8 Coupe (Type 42)": 34,
     "1972 Toyota Corolla E20": 69,
     "1998 Eurocopter EC120 Colibri": 19,
-    "1990 Mercedes-Benz Wolf 250GD": 13,
+    "1990 Mercedes-Benz Wolf 250GD": 45,
     "2001 BMW M3 GTR GT (E46)": 32,
     "1981 Lotus Turbo Esprit": 23,
     "Bitmain Antminer S9 ASIC Unit": 14,
@@ -347,10 +346,7 @@
     "1982 Pontiac Trans Am (K.I.T.T.)": 34,
     "1969 Dodge Charger \"General Lee\"": 36,
     "Big Cheese": 14,
-    "2022 Lamborghini Huracan STO": 16,
-    "1990 Mercedez-Benz Wolf 250GD": 32,
-    "General Motors EMD F40PH Amtrack Train": 7,
-    "1934 Mercedes Benz Grand Prix W25": 12
+    "2022 Lamborghini Huracan STO": 16
   },
   "Vehicle Color": {
     "White": 484,
